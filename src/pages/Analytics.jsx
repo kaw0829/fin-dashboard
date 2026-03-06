@@ -6,13 +6,10 @@ import members from '../data/members'
 import accounts from '../data/accounts'
 import transactions from '../data/transactions'
 
-// ── Constants ────────────────────────────────────────────────────────────────
-
 const TODAY = new Date('2026-03-06')
 
 const SEGMENT_DIMENSIONS = [
   { key: 'accountType', label: 'Account Type' },
-  { key: 'kycStatus',   label: 'KYC Status' },
   { key: 'status',      label: 'Member Status' },
   { key: 'balanceTier', label: 'Balance Tier' },
   { key: 'joinYear',    label: 'Join Year' },
@@ -32,8 +29,6 @@ const SEGMENT_METRICS = [
   { key: 'avgBalance',    label: 'Avg Balance' },
   { key: 'avgMembership', label: 'Avg Tenure (yrs)' },
 ]
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
 
 function getAge(dob) {
   const birth = new Date(dob)
@@ -61,8 +56,6 @@ function fmtYears(val) {
   return `${val.toFixed(1)} yrs`
 }
 
-// ── Pre-compute per-member aggregates (module-level, runs once) ───────────────
-
 const memberBalances = {}
 accounts.forEach(a => {
   memberBalances[a.memberId] = (memberBalances[a.memberId] ?? 0) + a.balance
@@ -88,8 +81,6 @@ const enriched = members.map(m => ({
     return 'Over $100K'
   })(),
 }))
-
-// ── Computation functions ─────────────────────────────────────────────────────
 
 function computeBuckets(boundaries) {
   return boundaries.slice(0, -1).map((lo, i) => {
@@ -123,8 +114,6 @@ function computeSegments(dimension) {
   }))
 }
 
-// ── Shared chart defaults ─────────────────────────────────────────────────────
-
 function columnChart(categories, data, color, height = 250) {
   return {
     chart:   { type: 'column', height, backgroundColor: 'transparent', style: { fontFamily: 'inherit' }, margin: [10, 10, 40, 52] },
@@ -137,11 +126,8 @@ function columnChart(categories, data, color, height = 250) {
   }
 }
 
-// ── Component ─────────────────────────────────────────────────────────────────
-
 export default function Analytics() {
 
-  // ── Age bucket state ─────────────────────────────────────────────────
   const [boundaries, setBoundaries] = useState([18, 26, 36, 51, 66, 81])
 
   const buckets     = useMemo(() => computeBuckets(boundaries), [boundaries])
@@ -161,7 +147,6 @@ export default function Analytics() {
   }
 
   function removeBoundary(innerIdx) {
-    // innerIdx is index within boundaries.slice(1,-1), so actual index = innerIdx + 1
     if (bucketCount <= 2) return
     setBoundaries(prev => prev.filter((_, i) => i !== innerIdx + 1))
   }
@@ -174,7 +159,6 @@ export default function Analytics() {
     setBoundaries(prev => prev.map((b, i) => (i === arrayIdx ? clamped : b)))
   }
 
-  // ── Bucket chart metric ───────────────────────────────────────────────
   const [bucketMetric, setBucketMetric] = useState('count')
 
   const bucketChartOptions = useMemo(() => {
@@ -194,7 +178,6 @@ export default function Analytics() {
     return opts
   }, [buckets, bucketMetric])
 
-  // ── Segmentation state ────────────────────────────────────────────────
   const [segmentDim, setSegmentDim]       = useState('accountType')
   const [segmentMetric, setSegmentMetric] = useState('count')
 
@@ -216,8 +199,7 @@ export default function Analytics() {
     return opts
   }, [segments, segmentMetric])
 
-  // ── Portfolio distribution ─────────────────────────────────────────────
-  const aumByType = useMemo(() => {
+  const assetsByType = useMemo(() => {
     const map = { Standard: 0, Premium: 0, Business: 0 }
     members.forEach(m => { map[m.accountType] = (map[m.accountType] ?? 0) + (memberBalances[m.id] ?? 0) })
     return map
@@ -229,9 +211,9 @@ export default function Analytics() {
     return Object.entries(map).sort(([a], [b]) => a.localeCompare(b))
   }, [])
 
-  const totalAUM = Object.values(aumByType).reduce((s, v) => s + v, 0)
+  const totalAssets = Object.values(assetsByType).reduce((s, v) => s + v, 0)
 
-  const aumDonutOptions = useMemo(() => ({
+  const donutOptions = useMemo(() => ({
     chart:   { type: 'pie', height: 280, backgroundColor: 'transparent', style: { fontFamily: 'inherit' } },
     title:   { text: null },
     credits: { enabled: false },
@@ -243,15 +225,15 @@ export default function Analytics() {
       },
     },
     series: [{
-      name: 'AUM',
+      name: 'Assets',
       data: [
-        { name: 'Standard', y: aumByType.Standard, color: '#94a3b8' },
-        { name: 'Premium',  y: aumByType.Premium,  color: '#d4a843' },
-        { name: 'Business', y: aumByType.Business, color: '#0d1b2a' },
+        { name: 'Standard', y: assetsByType.Standard, color: '#94a3b8' },
+        { name: 'Premium',  y: assetsByType.Premium,  color: '#d4a843' },
+        { name: 'Business', y: assetsByType.Business, color: '#0d1b2a' },
       ],
     }],
     legend: { enabled: false },
-  }), [aumByType])
+  }), [assetsByType])
 
   const joinYearChartOptions = useMemo(() => {
     const opts = columnChart(
@@ -265,7 +247,6 @@ export default function Analytics() {
     return opts
   }, [membersByJoinYear])
 
-  // ── Shared section header ─────────────────────────────────────────────
   function SectionHeader({ title, subtitle }) {
     return (
       <div className="mb-4">
@@ -275,7 +256,6 @@ export default function Analytics() {
     )
   }
 
-  // ── Shared select ─────────────────────────────────────────────────────
   function Select({ value, onChange, options }) {
     return (
       <select
@@ -291,26 +271,20 @@ export default function Analytics() {
   return (
     <div className="space-y-10">
 
-      {/* ═══════════════════════════════════════════════════════════════
-          Section 1 — Dynamic Age Buckets
-      ══════════════════════════════════════════════════════════════════ */}
       <section>
         <SectionHeader
           title="Age Bucket Analysis"
           subtitle="Define custom age ranges to compare member groups across key metrics."
         />
 
-        {/* Bucket boundary editor */}
         <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-100 mb-4">
           <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-3">Age Boundaries</p>
           <div className="flex items-center gap-2 flex-wrap">
 
-            {/* Fixed lower bound */}
             <span className="px-2.5 py-1 bg-slate-100 rounded-md font-mono text-xs text-slate-500">
               {boundaries[0]}
             </span>
 
-            {/* Editable inner boundaries */}
             {boundaries.slice(1, -1).map((b, i) => (
               <div key={i} className="flex items-center gap-2">
                 <span className="text-slate-300 text-xs">──</span>
@@ -336,13 +310,11 @@ export default function Analytics() {
               </div>
             ))}
 
-            {/* Fixed upper bound */}
             <span className="text-slate-300 text-xs">──</span>
             <span className="px-2.5 py-1 bg-slate-100 rounded-md font-mono text-xs text-slate-500">
               {boundaries[boundaries.length - 1]}
             </span>
 
-            {/* Add bucket */}
             <button
               onClick={addBucket}
               className="ml-2 flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-navy-800 bg-gold-100 hover:bg-gold-200 rounded-lg transition-colors"
@@ -356,7 +328,6 @@ export default function Analytics() {
           </p>
         </div>
 
-        {/* Chart + table */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-100">
             <div className="flex items-center justify-between mb-4">
@@ -398,9 +369,6 @@ export default function Analytics() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          Section 2 — Member Segmentation
-      ══════════════════════════════════════════════════════════════════ */}
       <section>
         <SectionHeader
           title="Member Segmentation"
@@ -449,9 +417,6 @@ export default function Analytics() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          Section 3 — Portfolio Distribution
-      ══════════════════════════════════════════════════════════════════ */}
       <section>
         <SectionHeader
           title="Portfolio Distribution"
@@ -461,8 +426,8 @@ export default function Analytics() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-100">
             <p className="text-sm font-semibold text-slate-700">Assets by Account Type</p>
-            <p className="text-xs text-slate-400 mt-0.5 mb-3">Total: {fmtCurrency(totalAUM)}</p>
-            <HighchartsReact highcharts={Highcharts} options={aumDonutOptions} />
+            <p className="text-xs text-slate-400 mt-0.5 mb-3">Total: {fmtCurrency(totalAssets)}</p>
+            <HighchartsReact highcharts={Highcharts} options={donutOptions} />
           </div>
 
           <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-100">
