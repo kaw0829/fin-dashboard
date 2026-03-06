@@ -1,253 +1,147 @@
-// Each member has 1–2 accounts.
-// Balance ranges by account type:
-//   Standard:  $500  – $15,000
-//   Premium:   $10,000 – $150,000
-//   Business:  $25,000 – $500,000
-
 const accounts = [
-  // MBR-0001 Standard
   { id: 'ACC-0001', memberId: 'MBR-0001', type: 'Checking', balance: 3240.50,    currency: 'USD', openedDate: '2025-01-15' },
-  // MBR-0002
   { id: 'ACC-0002', memberId: 'MBR-0002', type: 'Checking', balance: 1820.00,    currency: 'USD', openedDate: '2024-07-20' },
-  // MBR-0003
   { id: 'ACC-0003', memberId: 'MBR-0003', type: 'Checking', balance: 5610.75,    currency: 'USD', openedDate: '2024-03-10' },
-  // MBR-0004
   { id: 'ACC-0004', memberId: 'MBR-0004', type: 'Checking', balance: 720.30,     currency: 'USD', openedDate: '2023-08-05' },
-  // MBR-0005
   { id: 'ACC-0005', memberId: 'MBR-0005', type: 'Checking', balance: 8940.00,    currency: 'USD', openedDate: '2023-02-18' },
   { id: 'ACC-0006', memberId: 'MBR-0005', type: 'Savings',  balance: 4200.00,    currency: 'USD', openedDate: '2023-06-01' },
-  // MBR-0006
   { id: 'ACC-0007', memberId: 'MBR-0006', type: 'Checking', balance: 2100.80,    currency: 'USD', openedDate: '2022-11-30' },
-  // MBR-0007
   { id: 'ACC-0008', memberId: 'MBR-0007', type: 'Savings',  balance: 6750.00,    currency: 'USD', openedDate: '2022-06-14' },
-  // MBR-0008
   { id: 'ACC-0009', memberId: 'MBR-0008', type: 'Checking', balance: 980.40,     currency: 'USD', openedDate: '2021-09-22' },
-  // MBR-0009
   { id: 'ACC-0010', memberId: 'MBR-0009', type: 'Checking', balance: 540.00,     currency: 'USD', openedDate: '2021-04-07' },
-  // MBR-0010
   { id: 'ACC-0011', memberId: 'MBR-0010', type: 'Checking', balance: 11200.60,   currency: 'USD', openedDate: '2020-12-01' },
   { id: 'ACC-0012', memberId: 'MBR-0010', type: 'Savings',  balance: 3800.00,    currency: 'USD', openedDate: '2021-03-15' },
-  // MBR-0011
   { id: 'ACC-0013', memberId: 'MBR-0011', type: 'Savings',  balance: 7340.25,    currency: 'USD', openedDate: '2020-05-17' },
-  // MBR-0012
   { id: 'ACC-0014', memberId: 'MBR-0012', type: 'Checking', balance: 4560.90,    currency: 'USD', openedDate: '2019-11-03' },
-  // MBR-0013 Standard
   { id: 'ACC-0015', memberId: 'MBR-0013', type: 'Checking', balance: 6800.00,    currency: 'USD', openedDate: '2024-02-28' },
-  // MBR-0014 Premium
   { id: 'ACC-0016', memberId: 'MBR-0014', type: 'Checking', balance: 42500.00,   currency: 'USD', openedDate: '2023-09-11' },
   { id: 'ACC-0017', memberId: 'MBR-0014', type: 'Savings',  balance: 18600.00,   currency: 'USD', openedDate: '2023-10-01' },
-  // MBR-0015
   { id: 'ACC-0018', memberId: 'MBR-0015', type: 'Checking', balance: 9200.50,    currency: 'USD', openedDate: '2023-04-25' },
-  // MBR-0016
   { id: 'ACC-0019', memberId: 'MBR-0016', type: 'Checking', balance: 1350.00,    currency: 'USD', openedDate: '2022-10-08' },
-  // MBR-0017 Premium
   { id: 'ACC-0020', memberId: 'MBR-0017', type: 'Checking', balance: 67800.00,   currency: 'USD', openedDate: '2022-03-19' },
   { id: 'ACC-0021', memberId: 'MBR-0017', type: 'Savings',  balance: 31200.00,   currency: 'USD', openedDate: '2022-05-10' },
-  // MBR-0018
   { id: 'ACC-0022', memberId: 'MBR-0018', type: 'Checking', balance: 13400.75,   currency: 'USD', openedDate: '2021-08-30' },
-  // MBR-0019
   { id: 'ACC-0023', memberId: 'MBR-0019', type: 'Savings',  balance: 5900.00,    currency: 'USD', openedDate: '2021-01-14' },
-  // MBR-0020 Premium
   { id: 'ACC-0024', memberId: 'MBR-0020', type: 'Checking', balance: 88200.00,   currency: 'USD', openedDate: '2020-07-22' },
   { id: 'ACC-0025', memberId: 'MBR-0020', type: 'Savings',  balance: 45000.00,   currency: 'USD', openedDate: '2020-09-01' },
-  // MBR-0021
   { id: 'ACC-0026', memberId: 'MBR-0021', type: 'Checking', balance: 7650.30,    currency: 'USD', openedDate: '2020-02-09' },
-  // MBR-0022
   { id: 'ACC-0027', memberId: 'MBR-0022', type: 'Checking', balance: 2240.00,    currency: 'USD', openedDate: '2019-06-17' },
-  // MBR-0023 Business
   { id: 'ACC-0028', memberId: 'MBR-0023', type: 'Checking', balance: 128000.00,  currency: 'USD', openedDate: '2019-01-28' },
   { id: 'ACC-0029', memberId: 'MBR-0023', type: 'Savings',  balance: 74000.00,   currency: 'USD', openedDate: '2019-04-15' },
-  // MBR-0024 Premium
   { id: 'ACC-0030', memberId: 'MBR-0024', type: 'Checking', balance: 95400.50,   currency: 'USD', openedDate: '2018-10-05' },
-  // MBR-0025
   { id: 'ACC-0031', memberId: 'MBR-0025', type: 'Savings',  balance: 11800.00,   currency: 'USD', openedDate: '2018-04-12' },
-  // MBR-0026
   { id: 'ACC-0032', memberId: 'MBR-0026', type: 'Checking', balance: 4320.80,    currency: 'USD', openedDate: '2017-09-20' },
-  // MBR-0027 Business
   { id: 'ACC-0033', memberId: 'MBR-0027', type: 'Checking', balance: 215000.00,  currency: 'USD', openedDate: '2017-03-08' },
   { id: 'ACC-0034', memberId: 'MBR-0027', type: 'Savings',  balance: 88000.00,   currency: 'USD', openedDate: '2017-06-20' },
-  // MBR-0028 Premium
   { id: 'ACC-0035', memberId: 'MBR-0028', type: 'Checking', balance: 112000.00,  currency: 'USD', openedDate: '2016-11-25' },
   { id: 'ACC-0036', memberId: 'MBR-0028', type: 'Savings',  balance: 53000.00,   currency: 'USD', openedDate: '2017-01-10' },
-  // MBR-0029
   { id: 'ACC-0037', memberId: 'MBR-0029', type: 'Checking', balance: 6700.00,    currency: 'USD', openedDate: '2016-05-14' },
-  // MBR-0030 Premium
   { id: 'ACC-0038', memberId: 'MBR-0030', type: 'Checking', balance: 134500.00,  currency: 'USD', openedDate: '2015-12-03' },
-  // MBR-0031 Business
   { id: 'ACC-0039', memberId: 'MBR-0031', type: 'Checking', balance: 342000.00,  currency: 'USD', openedDate: '2015-06-17' },
   { id: 'ACC-0040', memberId: 'MBR-0031', type: 'Savings',  balance: 125000.00,  currency: 'USD', openedDate: '2015-09-01' },
-  // MBR-0032
   { id: 'ACC-0041', memberId: 'MBR-0032', type: 'Checking', balance: 1890.00,    currency: 'USD', openedDate: '2014-10-29' },
-  // MBR-0033 Premium
   { id: 'ACC-0042', memberId: 'MBR-0033', type: 'Checking', balance: 58000.00,   currency: 'USD', openedDate: '2024-01-07' },
   { id: 'ACC-0043', memberId: 'MBR-0033', type: 'Savings',  balance: 24000.00,   currency: 'USD', openedDate: '2024-02-01' },
-  // MBR-0034 Business
   { id: 'ACC-0044', memberId: 'MBR-0034', type: 'Checking', balance: 276000.00,  currency: 'USD', openedDate: '2023-06-19' },
-  // MBR-0035 Premium
   { id: 'ACC-0045', memberId: 'MBR-0035', type: 'Checking', balance: 79500.00,   currency: 'USD', openedDate: '2022-12-04' },
   { id: 'ACC-0046', memberId: 'MBR-0035', type: 'Savings',  balance: 36000.00,   currency: 'USD', openedDate: '2023-01-15' },
-  // MBR-0036
   { id: 'ACC-0047', memberId: 'MBR-0036', type: 'Checking', balance: 9870.00,    currency: 'USD', openedDate: '2022-05-21' },
-  // MBR-0037 Premium
   { id: 'ACC-0048', memberId: 'MBR-0037', type: 'Checking', balance: 102000.00,  currency: 'USD', openedDate: '2021-11-09' },
-  // MBR-0038 Business
   { id: 'ACC-0049', memberId: 'MBR-0038', type: 'Checking', balance: 388000.00,  currency: 'USD', openedDate: '2021-04-26' },
   { id: 'ACC-0050', memberId: 'MBR-0038', type: 'Savings',  balance: 145000.00,  currency: 'USD', openedDate: '2021-07-10' },
-  // MBR-0039 Premium
   { id: 'ACC-0051', memberId: 'MBR-0039', type: 'Checking', balance: 44200.00,   currency: 'USD', openedDate: '2020-09-13' },
-  // MBR-0040 Business
   { id: 'ACC-0052', memberId: 'MBR-0040', type: 'Checking', balance: 462000.00,  currency: 'USD', openedDate: '2020-03-02' },
   { id: 'ACC-0053', memberId: 'MBR-0040', type: 'Savings',  balance: 198000.00,  currency: 'USD', openedDate: '2020-05-15' },
-  // MBR-0041 Premium
   { id: 'ACC-0054', memberId: 'MBR-0041', type: 'Checking', balance: 118000.00,  currency: 'USD', openedDate: '2019-08-18' },
   { id: 'ACC-0055', memberId: 'MBR-0041', type: 'Savings',  balance: 62000.00,   currency: 'USD', openedDate: '2019-10-01' },
-  // MBR-0042 Business
   { id: 'ACC-0056', memberId: 'MBR-0042', type: 'Checking', balance: 315000.00,  currency: 'USD', openedDate: '2019-02-07' },
-  // MBR-0043 Premium
   { id: 'ACC-0057', memberId: 'MBR-0043', type: 'Checking', balance: 87600.00,   currency: 'USD', openedDate: '2018-07-29' },
   { id: 'ACC-0058', memberId: 'MBR-0043', type: 'Savings',  balance: 41000.00,   currency: 'USD', openedDate: '2018-09-12' },
-  // MBR-0044 Business
   { id: 'ACC-0059', memberId: 'MBR-0044', type: 'Checking', balance: 490000.00,  currency: 'USD', openedDate: '2018-01-14' },
   { id: 'ACC-0060', memberId: 'MBR-0044', type: 'Savings',  balance: 220000.00,  currency: 'USD', openedDate: '2018-04-01' },
-  // MBR-0045
   { id: 'ACC-0061', memberId: 'MBR-0045', type: 'Checking', balance: 12300.00,   currency: 'USD', openedDate: '2017-06-03' },
-  // MBR-0046 Premium
   { id: 'ACC-0062', memberId: 'MBR-0046', type: 'Checking', balance: 139000.00,  currency: 'USD', openedDate: '2016-12-21' },
-  // MBR-0047 Business
   { id: 'ACC-0063', memberId: 'MBR-0047', type: 'Checking', balance: 298000.00,  currency: 'USD', openedDate: '2016-05-10' },
   { id: 'ACC-0064', memberId: 'MBR-0047', type: 'Savings',  balance: 105000.00,  currency: 'USD', openedDate: '2016-08-01' },
-  // MBR-0048 Premium
   { id: 'ACC-0065', memberId: 'MBR-0048', type: 'Checking', balance: 56000.00,   currency: 'USD', openedDate: '2015-11-28' },
-  // MBR-0049 Business
   { id: 'ACC-0066', memberId: 'MBR-0049', type: 'Checking', balance: 410000.00,  currency: 'USD', openedDate: '2015-04-15' },
   { id: 'ACC-0067', memberId: 'MBR-0049', type: 'Savings',  balance: 175000.00,  currency: 'USD', openedDate: '2015-07-01' },
-  // MBR-0050 Premium
   { id: 'ACC-0068', memberId: 'MBR-0050', type: 'Checking', balance: 126000.00,  currency: 'USD', openedDate: '2014-09-02' },
   { id: 'ACC-0069', memberId: 'MBR-0050', type: 'Savings',  balance: 58000.00,   currency: 'USD', openedDate: '2014-11-15' },
-  // MBR-0051 Business
   { id: 'ACC-0070', memberId: 'MBR-0051', type: 'Checking', balance: 355000.00,  currency: 'USD', openedDate: '2014-02-20' },
-  // MBR-0052 Premium
   { id: 'ACC-0071', memberId: 'MBR-0052', type: 'Checking', balance: 148000.00,  currency: 'USD', openedDate: '2013-07-11' },
   { id: 'ACC-0072', memberId: 'MBR-0052', type: 'Savings',  balance: 72000.00,   currency: 'USD', openedDate: '2013-09-20' },
-  // MBR-0053 Business
   { id: 'ACC-0073', memberId: 'MBR-0053', type: 'Checking', balance: 445000.00,  currency: 'USD', openedDate: '2013-01-25' },
   { id: 'ACC-0074', memberId: 'MBR-0053', type: 'Savings',  balance: 190000.00,  currency: 'USD', openedDate: '2013-04-10' },
-  // MBR-0054 Premium
   { id: 'ACC-0075', memberId: 'MBR-0054', type: 'Checking', balance: 132000.00,  currency: 'USD', openedDate: '2012-06-08' },
-  // MBR-0055
   { id: 'ACC-0076', memberId: 'MBR-0055', type: 'Checking', balance: 8100.00,    currency: 'USD', openedDate: '2011-11-17' },
-  // MBR-0056 Business
   { id: 'ACC-0077', memberId: 'MBR-0056', type: 'Checking', balance: 378000.00,  currency: 'USD', openedDate: '2011-04-30' },
   { id: 'ACC-0078', memberId: 'MBR-0056', type: 'Savings',  balance: 142000.00,  currency: 'USD', openedDate: '2011-07-15' },
-  // MBR-0057 Premium
   { id: 'ACC-0079', memberId: 'MBR-0057', type: 'Checking', balance: 115000.00,  currency: 'USD', openedDate: '2010-09-12' },
   { id: 'ACC-0080', memberId: 'MBR-0057', type: 'Savings',  balance: 67000.00,   currency: 'USD', openedDate: '2010-12-01' },
-  // MBR-0058 Business
   { id: 'ACC-0081', memberId: 'MBR-0058', type: 'Checking', balance: 428000.00,  currency: 'USD', openedDate: '2010-03-01' },
-  // MBR-0059 Premium
   { id: 'ACC-0082', memberId: 'MBR-0059', type: 'Checking', balance: 71000.00,   currency: 'USD', openedDate: '2010-08-14' },
-  // MBR-0060 Business
   { id: 'ACC-0083', memberId: 'MBR-0060', type: 'Checking', balance: 495000.00,  currency: 'USD', openedDate: '2010-01-20' },
   { id: 'ACC-0084', memberId: 'MBR-0060', type: 'Savings',  balance: 210000.00,  currency: 'USD', openedDate: '2010-04-01' },
-  // MBR-0061 Premium
   { id: 'ACC-0085', memberId: 'MBR-0061', type: 'Checking', balance: 144000.00,  currency: 'USD', openedDate: '2022-07-03' },
   { id: 'ACC-0086', memberId: 'MBR-0061', type: 'Savings',  balance: 78000.00,   currency: 'USD', openedDate: '2022-09-01' },
-  // MBR-0062 Business
   { id: 'ACC-0087', memberId: 'MBR-0062', type: 'Checking', balance: 385000.00,  currency: 'USD', openedDate: '2021-12-18' },
-  // MBR-0063 Premium
   { id: 'ACC-0088', memberId: 'MBR-0063', type: 'Checking', balance: 128000.00,  currency: 'USD', openedDate: '2021-05-29' },
   { id: 'ACC-0089', memberId: 'MBR-0063', type: 'Savings',  balance: 55000.00,   currency: 'USD', openedDate: '2021-08-10' },
-  // MBR-0064 Business
   { id: 'ACC-0090', memberId: 'MBR-0064', type: 'Checking', balance: 312000.00,  currency: 'USD', openedDate: '2020-11-07' },
-  // MBR-0065 Premium
   { id: 'ACC-0091', memberId: 'MBR-0065', type: 'Checking', balance: 109000.00,  currency: 'USD', openedDate: '2020-04-15' },
   { id: 'ACC-0092', memberId: 'MBR-0065', type: 'Savings',  balance: 48000.00,   currency: 'USD', openedDate: '2020-06-20' },
-  // MBR-0066 Business
   { id: 'ACC-0093', memberId: 'MBR-0066', type: 'Checking', balance: 467000.00,  currency: 'USD', openedDate: '2019-09-28' },
-  // MBR-0067 Premium
   { id: 'ACC-0094', memberId: 'MBR-0067', type: 'Checking', balance: 63000.00,   currency: 'USD', openedDate: '2019-03-11' },
-  // MBR-0068 Business
   { id: 'ACC-0095', memberId: 'MBR-0068', type: 'Checking', balance: 398000.00,  currency: 'USD', openedDate: '2018-08-24' },
   { id: 'ACC-0096', memberId: 'MBR-0068', type: 'Savings',  balance: 162000.00,  currency: 'USD', openedDate: '2018-11-01' },
-  // MBR-0069 Premium
   { id: 'ACC-0097', memberId: 'MBR-0069', type: 'Checking', balance: 137000.00,  currency: 'USD', openedDate: '2018-02-06' },
-  // MBR-0070 Business
   { id: 'ACC-0098', memberId: 'MBR-0070', type: 'Checking', balance: 421000.00,  currency: 'USD', openedDate: '2017-07-19' },
   { id: 'ACC-0099', memberId: 'MBR-0070', type: 'Savings',  balance: 184000.00,  currency: 'USD', openedDate: '2017-10-01' },
-  // MBR-0071 Premium
   { id: 'ACC-0100', memberId: 'MBR-0071', type: 'Checking', balance: 152000.00,  currency: 'USD', openedDate: '2017-01-05' },
-  // MBR-0072 Business
   { id: 'ACC-0101', memberId: 'MBR-0072', type: 'Checking', balance: 336000.00,  currency: 'USD', openedDate: '2016-06-22' },
-  // MBR-0073 Premium
   { id: 'ACC-0102', memberId: 'MBR-0073', type: 'Checking', balance: 118500.00,  currency: 'USD', openedDate: '2015-11-09' },
   { id: 'ACC-0103', memberId: 'MBR-0073', type: 'Savings',  balance: 59000.00,   currency: 'USD', openedDate: '2016-01-15' },
-  // MBR-0074 Business
   { id: 'ACC-0104', memberId: 'MBR-0074', type: 'Checking', balance: 453000.00,  currency: 'USD', openedDate: '2015-04-27' },
   { id: 'ACC-0105', memberId: 'MBR-0074', type: 'Savings',  balance: 196000.00,  currency: 'USD', openedDate: '2015-07-10' },
-  // MBR-0075 Premium
   { id: 'ACC-0106', memberId: 'MBR-0075', type: 'Checking', balance: 141000.00,  currency: 'USD', openedDate: '2014-08-14' },
-  // MBR-0076 Business
   { id: 'ACC-0107', memberId: 'MBR-0076', type: 'Checking', balance: 389000.00,  currency: 'USD', openedDate: '2014-02-02' },
   { id: 'ACC-0108', memberId: 'MBR-0076', type: 'Savings',  balance: 168000.00,  currency: 'USD', openedDate: '2014-05-01' },
-  // MBR-0077 Premium
   { id: 'ACC-0109', memberId: 'MBR-0077', type: 'Checking', balance: 48000.00,   currency: 'USD', openedDate: '2013-07-20' },
-  // MBR-0078 Business
   { id: 'ACC-0110', memberId: 'MBR-0078', type: 'Checking', balance: 472000.00,  currency: 'USD', openedDate: '2012-12-08' },
   { id: 'ACC-0111', memberId: 'MBR-0078', type: 'Savings',  balance: 204000.00,  currency: 'USD', openedDate: '2013-02-15' },
-  // MBR-0079 Premium
   { id: 'ACC-0112', memberId: 'MBR-0079', type: 'Checking', balance: 125000.00,  currency: 'USD', openedDate: '2012-05-25' },
-  // MBR-0080 Business
   { id: 'ACC-0113', memberId: 'MBR-0080', type: 'Checking', balance: 415000.00,  currency: 'USD', openedDate: '2011-10-13' },
   { id: 'ACC-0114', memberId: 'MBR-0080', type: 'Savings',  balance: 178000.00,  currency: 'USD', openedDate: '2012-01-01' },
-  // MBR-0081 Premium
   { id: 'ACC-0115', memberId: 'MBR-0081', type: 'Checking', balance: 134000.00,  currency: 'USD', openedDate: '2011-03-01' },
-  // MBR-0082 Business
   { id: 'ACC-0116', memberId: 'MBR-0082', type: 'Checking', balance: 282000.00,  currency: 'USD', openedDate: '2010-07-18' },
-  // MBR-0083 Premium
   { id: 'ACC-0117', memberId: 'MBR-0083', type: 'Checking', balance: 119000.00,  currency: 'USD', openedDate: '2010-02-05' },
   { id: 'ACC-0118', memberId: 'MBR-0083', type: 'Savings',  balance: 61000.00,   currency: 'USD', openedDate: '2010-05-01' },
-  // MBR-0084 Business
   { id: 'ACC-0119', memberId: 'MBR-0084', type: 'Checking', balance: 498000.00,  currency: 'USD', openedDate: '2010-05-22' },
   { id: 'ACC-0120', memberId: 'MBR-0084', type: 'Savings',  balance: 215000.00,  currency: 'USD', openedDate: '2010-08-01' },
-  // MBR-0085 Premium
   { id: 'ACC-0121', memberId: 'MBR-0085', type: 'Checking', balance: 146000.00,  currency: 'USD', openedDate: '2020-09-01' },
   { id: 'ACC-0122', memberId: 'MBR-0085', type: 'Savings',  balance: 83000.00,   currency: 'USD', openedDate: '2020-11-01' },
-  // MBR-0086 Business
   { id: 'ACC-0123', memberId: 'MBR-0086', type: 'Checking', balance: 362000.00,  currency: 'USD', openedDate: '2019-04-16' },
-  // MBR-0087 Premium
   { id: 'ACC-0124', memberId: 'MBR-0087', type: 'Checking', balance: 121000.00,  currency: 'USD', openedDate: '2018-11-03' },
-  // MBR-0088 Business
   { id: 'ACC-0125', memberId: 'MBR-0088', type: 'Checking', balance: 435000.00,  currency: 'USD', openedDate: '2017-06-21' },
   { id: 'ACC-0126', memberId: 'MBR-0088', type: 'Savings',  balance: 188000.00,  currency: 'USD', openedDate: '2017-09-01' },
-  // MBR-0089 Premium
   { id: 'ACC-0127', memberId: 'MBR-0089', type: 'Checking', balance: 113000.00,  currency: 'USD', openedDate: '2016-01-09' },
-  // MBR-0090 Business
   { id: 'ACC-0128', memberId: 'MBR-0090', type: 'Checking', balance: 478000.00,  currency: 'USD', openedDate: '2015-06-27' },
   { id: 'ACC-0129', memberId: 'MBR-0090', type: 'Savings',  balance: 201000.00,  currency: 'USD', openedDate: '2015-09-15' },
-  // MBR-0091 Premium
   { id: 'ACC-0130', memberId: 'MBR-0091', type: 'Checking', balance: 138000.00,  currency: 'USD', openedDate: '2014-12-14' },
   { id: 'ACC-0131', memberId: 'MBR-0091', type: 'Savings',  balance: 74000.00,   currency: 'USD', openedDate: '2015-02-01' },
-  // MBR-0092 Business
   { id: 'ACC-0132', memberId: 'MBR-0092', type: 'Checking', balance: 327000.00,  currency: 'USD', openedDate: '2014-05-02' },
-  // MBR-0093 Premium
   { id: 'ACC-0133', memberId: 'MBR-0093', type: 'Checking', balance: 155000.00,  currency: 'USD', openedDate: '2013-10-20' },
-  // MBR-0094 Business
   { id: 'ACC-0134', memberId: 'MBR-0094', type: 'Checking', balance: 441000.00,  currency: 'USD', openedDate: '2013-03-08' },
   { id: 'ACC-0135', memberId: 'MBR-0094', type: 'Savings',  balance: 193000.00,  currency: 'USD', openedDate: '2013-06-01' },
-  // MBR-0095 Premium
   { id: 'ACC-0136', memberId: 'MBR-0095', type: 'Checking', balance: 129000.00,  currency: 'USD', openedDate: '2012-08-25' },
   { id: 'ACC-0137', memberId: 'MBR-0095', type: 'Savings',  balance: 68000.00,   currency: 'USD', openedDate: '2012-11-01' },
-  // MBR-0096 Business
   { id: 'ACC-0138', memberId: 'MBR-0096', type: 'Checking', balance: 295000.00,  currency: 'USD', openedDate: '2012-01-13' },
-  // MBR-0097 Premium
   { id: 'ACC-0139', memberId: 'MBR-0097', type: 'Checking', balance: 143000.00,  currency: 'USD', openedDate: '2011-06-01' },
-  // MBR-0098 Business
   { id: 'ACC-0140', memberId: 'MBR-0098', type: 'Checking', balance: 368000.00,  currency: 'USD', openedDate: '2010-11-18' },
   { id: 'ACC-0141', memberId: 'MBR-0098', type: 'Savings',  balance: 157000.00,  currency: 'USD', openedDate: '2011-02-01' },
-  // MBR-0099 Premium
   { id: 'ACC-0142', memberId: 'MBR-0099', type: 'Checking', balance: 136000.00,  currency: 'USD', openedDate: '2010-04-06' },
   { id: 'ACC-0143', memberId: 'MBR-0099', type: 'Savings',  balance: 71000.00,   currency: 'USD', openedDate: '2010-07-01' },
-  // MBR-0100 Business
   { id: 'ACC-0144', memberId: 'MBR-0100', type: 'Checking', balance: 487000.00,  currency: 'USD', openedDate: '2010-09-23' },
   { id: 'ACC-0145', memberId: 'MBR-0100', type: 'Savings',  balance: 223000.00,  currency: 'USD', openedDate: '2010-12-15' },
 ]

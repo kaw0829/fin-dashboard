@@ -1,6 +1,3 @@
-// ~500 transactions generated deterministically across members, categories,
-// and a 14-month date range (Jan 2025 – Feb 2026) for meaningful chart trends.
-
 const CATEGORIES = ['Shopping', 'Dining', 'Utilities', 'Transfer', 'Payroll', 'Healthcare', 'Travel', 'Investment', 'Insurance', 'Miscellaneous']
 const DESCRIPTIONS = {
   Shopping:     ['Online Purchase - Amazon', 'Retail - Target', 'Grocery - Whole Foods', 'Electronics - Best Buy', 'Clothing - Nordstrom'],
@@ -17,7 +14,6 @@ const DESCRIPTIONS = {
 const STATUSES = ['Cleared', 'Cleared', 'Cleared', 'Cleared', 'Pending', 'Flagged']
 const MEMBER_IDS = Array.from({ length: 100 }, (_, i) => `MBR-${String(i + 1).padStart(4, '0')}`)
 
-// Simple deterministic pseudo-random from a seed
 function seededRand(seed) {
   let s = seed
   return function () {
@@ -31,7 +27,6 @@ function generateTransactions() {
   const transactions = []
   let txNum = 1
 
-  // Spread ~500 transactions across 14 months (Jan 2025 – Feb 2026)
   const startDate = new Date('2025-01-01')
   const endDate   = new Date('2026-02-28')
   const dayRange  = Math.floor((endDate - startDate) / 86400000)
@@ -46,7 +41,6 @@ function generateTransactions() {
     const isCredit   = category === 'Payroll' || (category === 'Transfer' && rand() > 0.6)
     const type       = isCredit ? 'Credit' : 'Debit'
 
-    // Amount varies by category
     let amount
     if (category === 'Payroll')    amount = 2000 + Math.floor(rand() * 8000)
     else if (category === 'Investment') amount = 500 + Math.floor(rand() * 9500)
@@ -74,7 +68,6 @@ function generateTransactions() {
     txNum++
   }
 
-  // Sort by date descending
   transactions.sort((a, b) => new Date(b.date) - new Date(a.date))
   return transactions
 }

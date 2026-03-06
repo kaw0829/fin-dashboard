@@ -1,7 +1,5 @@
 import Highcharts from 'highcharts'
 
-// Apply brand colors and consistent styling to all Highcharts instances globally.
-// Per-chart options still override these defaults where specified.
 Highcharts.setOptions({
   chart: {
     style:           { fontFamily: 'inherit' },

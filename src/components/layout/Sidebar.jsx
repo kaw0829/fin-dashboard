@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { LayoutDashboard, BarChart2, Users, ArrowLeftRight } from 'lucide-react'
 
-// Each nav item defines its route path, label, and Lucide icon.
 const navItems = [
   { to: '/dashboard',    label: 'Dashboard',    Icon: LayoutDashboard },
   { to: '/analytics',   label: 'Analytics',    Icon: BarChart2 },

@@ -39,10 +39,8 @@ function StatCard({ icon: Icon, iconBg, label, value, pct, trendLabel }) {
 }
 
 export default function Dashboard() {
-  // ── Total AUM ──────────────────────────────────────────────────────────
   const totalAUM = useMemo(() => accounts.reduce((sum, a) => sum + a.balance, 0), [])
 
-  // ── Group transactions by YYYY-MM ──────────────────────────────────────
   const txByMonth = useMemo(() => {
     const map = {}
     transactions.forEach(tx => {
@@ -54,7 +52,6 @@ export default function Dashboard() {
     return map
   }, [])
 
-  // ── 14-month window: Jan 2025 → Feb 2026 ──────────────────────────────
   const monthSlots = useMemo(() => {
     const slots = []
     let y = 2025, m = 0
@@ -68,9 +65,6 @@ export default function Dashboard() {
     return slots
   }, [])
 
-  // ── Synthetic Assets history ──────────────────────────────────────────────
-  // Current total Assets is the end-state. Work backwards using each month's
-  // net transaction flow to reconstruct.
   const aumHistory = useMemo(() => {
     const result = new Array(14)
     result[13] = totalAUM
@@ -86,7 +80,6 @@ export default function Dashboard() {
     [monthSlots, txByMonth],
   )
 
-  // ── KPI trends ─────────────────────────────────────────────────────────
   const txFeb       = txByMonth['2026-02']?.count ?? 0
   const txJan       = txByMonth['2026-01']?.count ?? 0
   const txTrendPct  = txJan > 0 ? Math.round(((txFeb - txJan) / txJan) * 100) : 0
@@ -101,7 +94,6 @@ export default function Dashboard() {
     ? Math.round(((joiners2025 - joiners2024) / joiners2024) * 100)
     : 0
 
-  // ── Highcharts: asset area chart ─────────────────────────────────────────
   const aumChartOptions = useMemo(() => ({
     chart: {
       type: 'area',
@@ -140,7 +132,6 @@ export default function Dashboard() {
     legend: { enabled: false },
   }), [aumHistory, monthSlots])
 
-  // ── Highcharts: Transaction volume column chart ────────────────────────
   const txChartOptions = useMemo(() => ({
     chart: {
       type: 'column',
@@ -177,7 +168,6 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
 
-      {/* ── KPI Cards ────────────────────────────────────────────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <StatCard
           icon={Users}
@@ -205,7 +195,6 @@ export default function Dashboard() {
         />
       </div>
 
-      {/* ── Charts ───────────────────────────────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-100">
           <p className="text-sm font-semibold text-slate-700">Total Assets — 14 Month Trend</p>

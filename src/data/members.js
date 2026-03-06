@@ -1,9 +1,4 @@
-// 100 members spanning ages 18-80, join years 2010-2025
-// Distributed across account types, KYC statuses, and member statuses
-// to produce meaningful segmentation and age bucket analysis.
-
 const members = [
-  // ── Ages 18–25 (DOB 2000–2008) ──────────────────────────────────────
   { id: 'MBR-0001', firstName: 'Lira',     lastName: 'Ashveil',     dob: '2007-04-12', email: 'l.ashveil@mail.com',     phone: '555-101-0001', kycStatus: 'Verified', accountType: 'Standard', status: 'Active',    joinedDate: '2025-01-15' },
   { id: 'MBR-0002', firstName: 'Daven',    lastName: 'Croft',       dob: '2006-09-23', email: 'd.croft@mail.com',       phone: '555-101-0002', kycStatus: 'Pending',  accountType: 'Standard', status: 'Active',    joinedDate: '2024-07-20' },
   { id: 'MBR-0003', firstName: 'Sela',     lastName: 'Morrow',      dob: '2005-02-14', email: 's.morrow@mail.com',      phone: '555-101-0003', kycStatus: 'Verified', accountType: 'Standard', status: 'Active',    joinedDate: '2024-03-10' },
@@ -16,8 +11,6 @@ const members = [
   { id: 'MBR-0010', firstName: 'Orin',     lastName: 'Blackthorn',  dob: '2000-08-29', email: 'o.blackthorn@mail.com',  phone: '555-101-0010', kycStatus: 'Verified', accountType: 'Standard', status: 'Active',    joinedDate: '2020-12-01' },
   { id: 'MBR-0011', firstName: 'Mara',     lastName: 'Thistledown', dob: '2000-12-05', email: 'm.thistledown@mail.com', phone: '555-101-0011', kycStatus: 'Verified', accountType: 'Standard', status: 'Active',    joinedDate: '2020-05-17' },
   { id: 'MBR-0012', firstName: 'Finn',     lastName: 'Gallowell',   dob: '2000-06-22', email: 'f.gallowell@mail.com',   phone: '555-101-0012', kycStatus: 'Pending',  accountType: 'Standard', status: 'Active',    joinedDate: '2019-11-03' },
-
-  // ── Ages 26–35 (DOB 1990–1999) ──────────────────────────────────────
   { id: 'MBR-0013', firstName: 'Soren',    lastName: 'Aldgate',     dob: '1999-03-14', email: 's.aldgate@mail.com',     phone: '555-102-0013', kycStatus: 'Verified', accountType: 'Standard', status: 'Active',    joinedDate: '2024-02-28' },
   { id: 'MBR-0014', firstName: 'Delia',    lastName: 'Ravenswood',  dob: '1998-07-27', email: 'd.ravenswood@mail.com',  phone: '555-102-0014', kycStatus: 'Verified', accountType: 'Premium',  status: 'Active',    joinedDate: '2023-09-11' },
   { id: 'MBR-0015', firstName: 'Cael',     lastName: 'Whitmore',    dob: '1998-01-09', email: 'c.whitmore@mail.com',    phone: '555-102-0015', kycStatus: 'Verified', accountType: 'Standard', status: 'Active',    joinedDate: '2023-04-25' },
@@ -38,8 +31,6 @@ const members = [
   { id: 'MBR-0030', firstName: 'Aldric',   lastName: 'Fosse',       dob: '1990-04-19', email: 'a.fosse@mail.com',       phone: '555-102-0030', kycStatus: 'Verified', accountType: 'Premium',  status: 'Active',    joinedDate: '2015-12-03' },
   { id: 'MBR-0031', firstName: 'Neve',     lastName: 'Castlemere',  dob: '1990-09-26', email: 'n.castlemere@mail.com',  phone: '555-102-0031', kycStatus: 'Verified', accountType: 'Business', status: 'Active',    joinedDate: '2015-06-17' },
   { id: 'MBR-0032', firstName: 'Ruari',    lastName: 'Stonecliff',  dob: '1990-02-08', email: 'r.stonecliff@mail.com',  phone: '555-102-0032', kycStatus: 'Flagged',  accountType: 'Standard', status: 'Suspended', joinedDate: '2014-10-29' },
-
-  // ── Ages 36–50 (DOB 1975–1989) ──────────────────────────────────────
   { id: 'MBR-0033', firstName: 'Petra',    lastName: 'Wyndmere',    dob: '1989-06-11', email: 'p.wyndmere@mail.com',    phone: '555-103-0033', kycStatus: 'Verified', accountType: 'Premium',  status: 'Active',    joinedDate: '2024-01-07' },
   { id: 'MBR-0034', firstName: 'Calder',   lastName: 'Brightholm',  dob: '1988-10-24', email: 'c.brightholm@mail.com',  phone: '555-103-0034', kycStatus: 'Verified', accountType: 'Business', status: 'Active',    joinedDate: '2023-06-19' },
   { id: 'MBR-0035', firstName: 'Isolde',   lastName: 'Tremaine',    dob: '1988-03-06', email: 'i.tremaine@mail.com',    phone: '555-103-0035', kycStatus: 'Verified', accountType: 'Premium',  status: 'Active',    joinedDate: '2022-12-04' },
@@ -68,8 +59,6 @@ const members = [
   { id: 'MBR-0058', firstName: 'Tobias',   lastName: 'Fernbrook',   dob: '1976-04-08', email: 't.fernbrook@mail.com',   phone: '555-103-0058', kycStatus: 'Verified', accountType: 'Business', status: 'Active',    joinedDate: '2010-03-01' },
   { id: 'MBR-0059', firstName: 'Isadora',  lastName: 'Wellstone',   dob: '1976-10-21', email: 'i.wellstone@mail.com',   phone: '555-103-0059', kycStatus: 'Flagged',  accountType: 'Premium',  status: 'Suspended', joinedDate: '2010-08-14' },
   { id: 'MBR-0060', firstName: 'Brennan',  lastName: 'Coldmere',    dob: '1975-07-04', email: 'b.coldmere@mail.com',    phone: '555-103-0060', kycStatus: 'Verified', accountType: 'Business', status: 'Active',    joinedDate: '2010-01-20' },
-
-  // ── Ages 51–65 (DOB 1960–1974) ──────────────────────────────────────
   { id: 'MBR-0061', firstName: 'Helena',   lastName: 'Stormwick',   dob: '1974-08-15', email: 'h.stormwick@mail.com',   phone: '555-104-0061', kycStatus: 'Verified', accountType: 'Premium',  status: 'Active',    joinedDate: '2022-07-03' },
   { id: 'MBR-0062', firstName: 'Aldous',   lastName: 'Greymoor',    dob: '1973-12-28', email: 'a.greymoor@mail.com',    phone: '555-104-0062', kycStatus: 'Verified', accountType: 'Business', status: 'Active',    joinedDate: '2021-12-18' },
   { id: 'MBR-0063', firstName: 'Vivienne', lastName: 'Ashcroft',    dob: '1973-05-11', email: 'v.ashcroft@mail.com',    phone: '555-104-0063', kycStatus: 'Verified', accountType: 'Premium',  status: 'Active',    joinedDate: '2021-05-29' },
@@ -94,8 +83,6 @@ const members = [
   { id: 'MBR-0082', firstName: 'Lavinia',  lastName: 'Wintermere',  dob: '1962-05-15', email: 'l.wintermere@mail.com',  phone: '555-104-0082', kycStatus: 'Pending',  accountType: 'Business', status: 'Inactive',  joinedDate: '2010-07-18' },
   { id: 'MBR-0083', firstName: 'Florentine',lastName:'Coldspring',  dob: '1961-09-28', email: 'f.coldspring@mail.com',  phone: '555-104-0083', kycStatus: 'Verified', accountType: 'Premium',  status: 'Active',    joinedDate: '2010-02-05' },
   { id: 'MBR-0084', firstName: 'Bartholomew',lastName:'Ashfield',   dob: '1960-02-10', email: 'b.ashfield@mail.com',    phone: '555-104-0084', kycStatus: 'Verified', accountType: 'Business', status: 'Active',    joinedDate: '2010-05-22' },
-
-  // ── Ages 66–80 (DOB 1945–1959) ──────────────────────────────────────
   { id: 'MBR-0085', firstName: 'Evangeline',lastName: 'Stormgate',  dob: '1959-06-14', email: 'e.stormgate@mail.com',   phone: '555-105-0085', kycStatus: 'Verified', accountType: 'Premium',  status: 'Active',    joinedDate: '2020-09-01' },
   { id: 'MBR-0086', firstName: 'Crispin',   lastName: 'Mosswick',   dob: '1958-10-27', email: 'c.mosswick@mail.com',    phone: '555-105-0086', kycStatus: 'Verified', accountType: 'Business', status: 'Active',    joinedDate: '2019-04-16' },
   { id: 'MBR-0087', firstName: 'Hermione',  lastName: 'Dunmore',    dob: '1958-03-10', email: 'h.dunmore@mail.com',     phone: '555-105-0087', kycStatus: 'Verified', accountType: 'Premium',  status: 'Active',    joinedDate: '2018-11-03' },
