@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  /* Weavers Guild Of Whiterun brand colors */
+  --color-navy-900: #0d1b2a;
+  --color-navy-800: #1b2a3b;
+  --color-navy-700: #243447;
+  --color-navy-600: #2e4057;
+  --color-gold-400: #d4a843;
+  --color-gold-300: #e0bc6b;
+  --color-gold-200: #edd494;
+  --color-gold-100: #f7ecd1;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #f1f5f9;
+}
